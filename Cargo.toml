@@ -1,0 +1,42 @@
+[package]
+name = "mcpg-plugin-security-guardrails"
+version = "0.1.0-alpha.15"
+license = "BUSL-1.1"
+edition = "2024"
+description = "HTTP guardrail hooks plugin for MCPG gateway — content scanning, PDP, approval workflows"
+
+[lib]
+crate-type = ["cdylib", "rlib"]
+
+[dependencies]
+mcpg-plugin-protocol = { git = "https://github.com/mcpg-dev/mcpg-plugin-protocol", tag = "v0.1.0-beta.13", version = "=0.1.0-beta.13" }
+mcpg-plugin-sdk = { git = "https://github.com/mcpg-dev/mcpg-plugin-sdk", tag = "v0.1.0-beta.13", version = "=0.1.0-beta.13" }
+mcpg-glob = { git = "https://github.com/mcpg-dev/mcpg-glob", tag = "v0.1.0-beta.13", version = "=0.1.0-beta.13" }
+anyhow = "1.0"
+cel = "0.13.0"
+metrics = "0.24"
+# `blocking` feature: the plugin ships as a sync cdylib. Guardrail
+# HTTP calls use reqwest's blocking client rather than pulling a
+# tokio runtime into every loaded artefact.
+reqwest = { version = "0.12", default-features = false, features = ["json", "rustls-tls", "blocking"] }
+serde = { version = "1.0", features = ["derive"] }
+serde_json = "1.0"
+tracing = "0.1"
+
+# No dev-deps: the live-HTTP integration tests were removed along
+# with the async-trait conversion — the cdylib plugin is sync-only
+# and testing against a running server belongs in the host-side
+# migrated-plugin conformance tests, not in this crate.
+
+[features]
+# Default ON so standalone `cargo build -p <this>` still produces a
+# working cdylib. Disabled by the gateway's path-dep so multiple
+# plugins linked together don't all export `mcpg_plugin_register`
+# (linker collision).
+default = ["cdylib-export"]
+cdylib-export = []
+# Declared so the SDK's per-kind `build_static` accessor
+# (gated `#[cfg(feature = "static-firstparty")]`) does not trigger
+# `unexpected_cfgs` in consumer compilation. Empty: this plugin is
+# consumed as a cdylib, not via the static-firstparty fast path.
+static-firstparty = []

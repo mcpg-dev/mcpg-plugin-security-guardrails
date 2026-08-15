@@ -1,0 +1,14 @@
+schema: mcpg.dev/plugin/v1
+id: dev.mcpg.guardrails
+name: HTTP Guardrail Hooks
+license: BUSL-1.1
+description: |
+  Invokes configured external HTTP guardrail endpoints pre- and
+  post-dispatch to approve / deny tool calls. Useful for policy
+  engines that cannot be embedded as a Wasm plugin.
+class: tool_gate
+runtime: native-cdylib-v1
+protocol_version: "1.0"
+required_capabilities:
+  # Guardrails POST to external PDP services on every tool call.
+  - network_outbound
