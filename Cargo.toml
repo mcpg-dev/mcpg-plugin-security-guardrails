@@ -1,6 +1,6 @@
 [package]
 name = "mcpg-plugin-security-guardrails"
-version = "0.1.0-alpha.23"
+version = "0.1.0-alpha.24"
 license = "BUSL-1.1"
 edition = "2024"
 description = "HTTP guardrail hooks plugin for MCPG gateway — content scanning, PDP, approval workflows"
@@ -9,8 +9,8 @@ description = "HTTP guardrail hooks plugin for MCPG gateway — content scanning
 crate-type = ["cdylib", "rlib"]
 
 [dependencies]
-mcpg-plugin-protocol = { git = "https://github.com/mcpg-dev/mcpg-plugin-protocol", tag = "v0.1.0-beta.21", version = "=0.1.0-beta.21" }
-mcpg-plugin-sdk = { git = "https://github.com/mcpg-dev/mcpg-plugin-sdk", tag = "v0.1.0-beta.21", version = "=0.1.0-beta.21" }
+mcpg-plugin-protocol = { git = "https://github.com/mcpg-dev/mcpg-plugin-protocol", tag = "v0.1.0-beta.22", version = "=0.1.0-beta.22" }
+mcpg-plugin-sdk = { git = "https://github.com/mcpg-dev/mcpg-plugin-sdk", tag = "v0.1.0-beta.22", version = "=0.1.0-beta.22" }
 mcpg-glob = { git = "https://github.com/mcpg-dev/mcpg-glob", tag = "v0.1.0-beta.21", version = "=0.1.0-beta.21" }
 anyhow = "1.0"
 cel = "0.13.0"
