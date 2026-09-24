@@ -1,6 +1,6 @@
 [package]
 name = "mcpg-plugin-security-guardrails"
-version = "0.1.0-alpha.31"
+version = "0.1.0-alpha.37"
 license = "BUSL-1.1"
 edition = "2024"
 description = "HTTP guardrail hooks plugin for MCPG gateway — content scanning, PDP, approval workflows"
@@ -9,16 +9,16 @@ description = "HTTP guardrail hooks plugin for MCPG gateway — content scanning
 crate-type = ["cdylib", "rlib"]
 
 [dependencies]
-mcpg-plugin-protocol = { git = "https://github.com/mcpg-dev/mcpg-plugin-protocol", tag = "v0.1.0-beta.29", version = "=0.1.0-beta.29" }
-mcpg-plugin-sdk = { git = "https://github.com/mcpg-dev/mcpg-plugin-sdk", tag = "v0.1.0-beta.30", version = "=0.1.0-beta.30" }
-mcpg-glob = { git = "https://github.com/mcpg-dev/mcpg-glob", tag = "v0.1.0-beta.28", version = "=0.1.0-beta.28" }
+mcpg-plugin-protocol = { git = "https://github.com/mcpg-dev/mcpg-plugin-protocol", tag = "v0.1.0-beta.35", version = "=0.1.0-beta.35" }
+mcpg-plugin-sdk = { git = "https://github.com/mcpg-dev/mcpg-plugin-sdk", tag = "v0.1.0-beta.36", version = "=0.1.0-beta.36" }
+mcpg-glob = { git = "https://github.com/mcpg-dev/mcpg-glob", tag = "v0.1.0-beta.34", version = "=0.1.0-beta.34" }
 anyhow = "1.0"
-cel = "0.13.0"
+cel = "0.14.5"
 metrics = "0.24"
 # `blocking` feature: the plugin ships as a sync cdylib. Guardrail
 # HTTP calls use reqwest's blocking client rather than pulling a
 # tokio runtime into every loaded artefact.
-reqwest = { version = "0.12", default-features = false, features = ["json", "rustls-tls", "blocking"] }
+reqwest = { version = "0.13", default-features = false, features = ["json", "rustls", "blocking"] }
 serde = { version = "1.0", features = ["derive"] }
 serde_json = "1.0"
 tracing = "0.1"
